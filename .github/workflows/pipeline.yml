@@ -41,6 +41,10 @@ jobs:
         shell: cmd
     steps:
       - uses: actions/checkout@v4
+      - name: Log in to GHCR
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Stop existing containers
+        run: docker compose down || exit 0
       - name: Pull latest images
         run: docker compose pull
       - name: Start containers
