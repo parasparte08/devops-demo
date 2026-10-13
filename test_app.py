@@ -1,9 +1,11 @@
 from app import app
- 
+
 def test_home():
-    r = app.test_client().get("/")
-    assert r.status_code == 200
- 
+    response = app.test_client().get('/')
+    assert response.status_code == 200
+    assert b"v2" in response.data
+
 def test_health():
-    r = app.test_client().get("/health")
-    assert r.json["status"] == "ok"
+    response = app.test_client().get('/health')
+    assert response.status_code == 200
+    assert response.data == b"OK"
