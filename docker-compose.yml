@@ -1,12 +1,20 @@
+version: '3.8'
+
 services:
   app:
     image: ghcr.io/parasparte08/devops-demo:latest
-    ports: ["5000:5000"]
+    ports:
+      - "5000:5000"
     restart: always
+
   prometheus:
-    image: prom/prometheus
-    volumes: ["./prometheus.yml:/etc/prometheus/prometheus.yml"]
-    ports: ["9090:9090"]
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
   grafana:
-    image: grafana/grafana
-    ports: ["3000:3000"]
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
